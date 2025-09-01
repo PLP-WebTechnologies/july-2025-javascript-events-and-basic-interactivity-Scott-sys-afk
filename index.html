@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #ffde7d;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: white;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2d4059;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #6c757d;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #6e8efb;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+        
+        .btn:hover {
+            background: #5a7df9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2d4059;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card h3 {
+            color: #6e8efb;
+            margin-bottom: 1rem;
+        }
+        
+        .form-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d4059;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e6e9ef;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #6e8efb;
+            outline: none;
+        }
+        
+        .error {
+            color: #e84545;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        
+        .form-control.error-input {
+            border-color: #e84545;
+        }
+        
+        .counter-section {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 3rem auto;
+        }
+        
+        .counter-value {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #6e8efb;
+            margin: 1rem 0;
+        }
+        
+        .counter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .theme-switcher {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .theme-btn {
+            background: #2d4059;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-btn:hover {
+            background: #1e2a3d;
+        }
+        
+        footer {
+            background: #2d4059;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .dark-theme {
+            background-color: #1a1a2e;
+            color: #f0f0f0;
+        }
+        
+        .dark-theme .hero,
+        .dark-theme .feature-card,
+        .dark-theme .form-section,
+        .dark-theme .counter-section {
+            background-color: #16213e;
+            color: #f0f0f0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-theme .feature-card h3,
+        .dark-theme .section-title,
+        .dark-theme .form-group label {
+            color: #6e8efb;
+        }
+        
+        .dark-theme .form-control {
+            background-color: #1a1a2e;
+            border-color: #2d4059;
+            color: #f0f0f0;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Interactify</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#form">Form</a></li>
+                    <li><a href="#counter">Counter</a></li>
+                    <li><a href="#theme">Theme</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Interactive Web Experience</h1>
+            <p>Explore the various interactive elements on this page, including a custom form validation, dynamic counter, and theme switcher.</p>
+            <a href="#form" class="btn">Get Started</a>
+        </section>
+
+        <section id="features">
+            <h2 class="section-title">Interactive Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Custom Form Validation</h3>
+                    <p>Our form includes custom JavaScript validation for all fields with detailed error messages and visual feedback.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Dynamic Counter</h3>
+                    <p>The interactive counter allows you to increment, decrement, and reset the value with smooth animations.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Theme Switcher</h3>
+                    <p>Switch between light and dark themes with a single click, with preferences saved in your browser.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="form">
+            <h2 class="section-title">Registration Form</h2>
+            <div class="form-section">
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your full name">
+                        <div class="error" id="name-error">Please enter a valid name (min 2 characters)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="text" id="email" class="form-control" placeholder="Enter your email">
+                        <div class="error" id="email-error">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Create a password">
+                        <div class="error" id="password-error">Password must be at least 8 characters with one number and one special character</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password">
+                        <div class="error" id="confirm-password-error">Passwords do not match</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" class="form-control" placeholder="Enter your age">
+                        <div class="error" id="age-error">You must be at least 18 years old</div>
+                    </div>
+
+                    <button type="submit" class="btn">Register Now</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="counter">
+            <h2 class="section-title">Interactive Counter</h2>
+            <div class="counter-section">
+                <h3>Current Count:</h3>
+                <div class="counter-value" id="count">0</div>
+                <div class="counter-buttons">
+                    <button class="btn" id="decrement">Decrement</button>
+                    <button class="btn" id="reset">Reset</button>
+                    <button class="btn" id="increment">Increment</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="theme" class="theme-switcher">
+            <h2 class="section-title">Theme Switcher</h2>
+            <button class="theme-btn" id="theme-toggle">Switch to Dark Mode</button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Interactify. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Form Validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registration-form');
+            
+            // Get form fields
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+            const ageInput = document.getElementById('age');
+            
+            // Get error elements
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            const confirmPasswordError = document.getElementById('confirm-password-error');
+            const ageError = document.getElementById('age-error');
+            
+            // Validate name field
+            nameInput.addEventListener('blur', function() {
+                if (nameInput.value.trim().length < 2) {
+                    showError(nameInput, nameError);
+                } else {
+                    clearError(nameInput, nameError);
+                }
+            });
+            
+            // Validate email field
+            emailInput.addEventListener('blur', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    showError(emailInput, emailError);
+                } else {
+                    clearError(emailInput, emailError);
+                }
+            });
+            
+            // Validate password field
+            passwordInput.addEventListener('blur', function() {
+                const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+                if (!passwordRegex.test(passwordInput.value)) {
+                    showError(passwordInput, passwordError);
+                } else {
+                    clearError(passwordInput, passwordError);
+                }
+            });
+            
+            // Validate confirm password field
+            confirmPasswordInput.addEventListener('blur', function() {
+                if (confirmPasswordInput.value !== passwordInput.value) {
+                    showError(confirmPasswordInput, confirmPasswordError);
+                } else {
+                    clearError(confirmPasswordInput, confirmPasswordError);
+                }
+            });
+            
+            // Validate age field
+            ageInput.addEventListener('blur', function() {
+                if (ageInput.value < 18) {
+                    showError(ageInput, ageError);
+                } else {
+                    clearError(ageInput, ageError);
+                }
+            });
+            
+            // Form submission handler
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate all fields on submit
+                let isValid = true;
+                
+                if (nameInput.value.trim().length < 2) {
+                    showError(nameInput, nameError);
+                    isValid = false;
+                }
+                
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    showError(emailInput, emailError);
+                    isValid = false;
+                }
+                
+                const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+                if (!passwordRegex.test(passwordInput.value)) {
+                    showError(passwordInput, passwordError);
+                    isValid = false;
+                }
+                
+                if (confirmPasswordInput.value !== passwordInput.value) {
+                    showError(confirmPasswordInput, confirmPasswordError);
+                    isValid = false;
+                }
+                
+                if (ageInput.value < 18) {
+                    showError(ageInput, ageError);
+                    isValid = false;
+                }
+                
+                // If form is valid, show success message
+                if (isValid) {
+                    alert('Form submitted successfully!');
+                    form.reset();
+                }
+            });
+            
+            // Helper function to show error
+            function showError(input, errorElement) {
+                input.classList.add('error-input');
+                errorElement.style.display = 'block';
+            }
+            
+            // Helper function to clear error
+            function clearError(input, errorElement) {
+                input.classList.remove('error-input');
+                errorElement.style.display = 'none';
+            }
+            
+            // Interactive Counter
+            const countElement = document.getElementById('count');
+            const incrementBtn = document.getElementById('increment');
+            const decrementBtn = document.getElementById('decrement');
+            const resetBtn = document.getElementById('reset');
+            
+            let count = 0;
+            
+            // Increment counter
+            incrementBtn.addEventListener('click', function() {
+                count++;
+                updateCounter();
+            });
+            
+            // Decrement counter
+            decrementBtn.addEventListener('click', function() {
+                count--;
+                updateCounter();
+            });
+            
+            // Reset counter
+            resetBtn.addEventListener('click', function() {
+                count = 0;
+                updateCounter();
+            });
+            
+            // Update counter display with animation
+            function updateCounter() {
+                countElement.textContent = count;
+                
+                // Add animation
+                countElement.style.transform = 'scale(1.2)';
+                countElement.style.transition = 'transform 0.2s ease';
+                
+                setTimeout(() => {
+                    countElement.style.transform = 'scale(1)';
+                }, 200);
+                
+                // Change color based on value
+                if (count > 0) {
+                    countElement.style.color = '#4caf50';
+                } else if (count < 0) {
+                    countElement.style.color = '#e84545';
+                } else {
+                    countElement.style.color = '#6e8efb';
+                }
+            }
+            
+            // Theme Switcher
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const body = document.body;
+            
+            // Check for saved theme preference
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-theme');
+                themeToggleBtn.textContent = 'Switch to Light Mode';
+            }
+            
+            // Toggle theme
+            themeToggleBtn.addEventListener('click', function() {
+                body.classList.toggle('dark-theme');
+                
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggleBtn.textContent = 'Switch to Light Mode';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggleBtn.textContent = 'Switch to Dark Mode';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
